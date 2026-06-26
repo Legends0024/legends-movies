@@ -1,65 +1,59 @@
-import Image from "next/image";
+import { getTrendingMovies, getMediaByProvider } from "@/lib/tmdb";
+import MovieRow from "@/components/MovieRow";
 
-export default function Home() {
+export default async function Home() {
+  const trendingMovies = await getTrendingMovies();
+  const heroMovie = trendingMovies[0];
+
+  // Fetch provider specific content (Region: IN)
+  const netflixMovies = await getMediaByProvider(8);
+  const primeMovies = await getMediaByProvider(119);
+  const hotstarMovies = await getMediaByProvider(122);
+  const sonylivMovies = await getMediaByProvider(237);
+  const appleMovies = await getMediaByProvider(350);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="w-full">
+      {/* Hero Section */}
+      {heroMovie && (
+        <section className="relative w-full h-[70vh] lg:h-[85vh]">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original${heroMovie.backdrop_path})`,
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent" />
+          </div>
+
+          <div className="relative z-10 h-full flex flex-col justify-center px-6 md:px-16 w-full lg:w-1/2">
+            <h1 className="text-4xl md:text-6xl font-bold drop-shadow-xl mb-4 text-white">
+              {heroMovie.title || heroMovie.name}
+            </h1>
+            <p className="text-lg text-neutral-300 drop-shadow-md mb-8 line-clamp-3">
+              {heroMovie.overview}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* Grid Content */}
+      <section className="relative z-20 px-6 md:px-16 pb-20 -mt-24 flex flex-col gap-12">
+        <MovieRow title="Trending Movies" movies={trendingMovies.slice(1)} />
+        <MovieRow title="Netflix Originals" movies={netflixMovies} />
+        <MovieRow title="Prime Video" movies={primeMovies} />
+        <MovieRow title="Hotstar Picks" movies={hotstarMovies} />
+        <MovieRow title="Sony Liv" movies={sonylivMovies} />
+        <MovieRow title="Apple TV+" movies={appleMovies} />
+      </section>
+
+      {/* TMDB Attribution */}
+      <footer className="w-full py-8 mt-12 border-t border-neutral-800 text-center">
+        <p className="text-neutral-500 text-sm">
+          This product uses the TMDb API but is not endorsed or certified by TMDb.
+        </p>
+      </footer>
+    </main>
   );
 }

@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LegendsMovies Streaming Platform
 
-## Getting Started
+A professional, high-performance streaming web application built with Next.js 15, Tailwind CSS, and the TMDB API. It features a Netflix-style UI with modular React components, client-side bookmarking, and dynamic media embedding.
 
-First, run the development server:
+## Features
+- **Next.js 15 App Router**: Server-side rendering and lightning-fast page transitions.
+- **TMDB API Integration**: Dynamically fetches trending movies, series, and provider-specific categories (Netflix, Prime, Hotstar, Sony Liv, Apple TV+).
+- **Live Search**: Real-time server-action debounced search with dropdown suggestions.
+- **Premium UI**: Uses `bg-neutral-950`, glassmorphism, horizontal smooth scrolling (`overflow-x-auto` & `scrollbar-hide`), and modern Skeleton Loaders via `<Suspense>`.
+- **Instant Playback**: Routes directly to a full-screen, embedded VidCore player.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Development Setup
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory and add your TMDB API Key:
+   ```env
+   NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+## Production Deployment to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+To deploy this platform to Vercel, you MUST configure your environment variables securely:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push your code to a GitHub repository.
+2. Log in to your [Vercel Dashboard](https://vercel.com/dashboard) and click **Add New** > **Project**.
+3. Import your GitHub repository.
+4. **CRITICAL STEP**: Before clicking deploy, expand the **Environment Variables** section.
+5. Add the following exact key-value pair:
+   - **Key**: `NEXT_PUBLIC_TMDB_API_KEY`
+   - **Value**: `81d9c8ab60c726d593ac67cfc7391d2e` *(Replace with your actual key if different)*
+6. Click **Deploy**. Vercel will securely embed this key during build-time so your API routes function perfectly.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*This product uses the TMDb API but is not endorsed or certified by TMDb.*
