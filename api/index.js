@@ -109,6 +109,22 @@ app.get("/api/genres/:type", async (req, res) => {
   }
 });
 
+// Discover Movies/TV by parameters (e.g. genre)
+app.get("/api/discover/:type", async (req, res) => {
+  const type = req.params.type === "tv" ? "tv" : "movie";
+  const { with_genres, sort_by } = req.query;
+  
+  try {
+    const data = await fetchTMDB(`/discover/${type}`, { 
+      with_genres, 
+      sort_by: sort_by || "popularity.desc" 
+    });
+    res.json(data.results || []);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to discover media" });
+  }
+});
+
 // Vercel Serverless Export
 // Vercel Serverless Export
 if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {

@@ -74,8 +74,8 @@ export default function Navbar() {
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-300">
           <Link to="/" className="hover:text-white transition">Home</Link>
-          <Link to="/" className="hover:text-white transition">TV Shows</Link>
-          <Link to="/" className="hover:text-white transition">Movies</Link>
+          <Link to="/tv" className="hover:text-white transition">TV Shows</Link>
+          <Link to="/movies" className="hover:text-white transition">Movies</Link>
         </nav>
       </div>
       <div className="flex items-center gap-4" ref={searchRef}>

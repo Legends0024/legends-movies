@@ -27,4 +27,10 @@ export const api = {
     const res = await axios.get(`${API_BASE}/genres/${type}`);
     return res.data;
   },
+  discover: async (type = "movie", genreId = "") => {
+    let url = `${API_BASE}/discover/${type}`;
+    if (genreId) url += `?with_genres=${genreId}`;
+    const res = await axios.get(url);
+    return res.data;
+  }
 };

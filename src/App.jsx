@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Movies from "./pages/Movies";
+import TvShows from "./pages/TvShows";
 import WatchPage from "./pages/WatchPage";
 import SearchPage from "./pages/SearchPage";
 import NotFound from "./pages/NotFound";
@@ -12,6 +14,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/tv" element={<TvShows />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/watch/movie/:id" element={<WatchPage type="movie" />} />
           <Route path="/watch/tv/:id" element={<WatchPage type="tv" />} />
