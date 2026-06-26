@@ -13,7 +13,7 @@ interface PlayerProps {
   serverId?: string;
 }
 
-export default function Player({ id, title, type, season, episode, serverId = "vidcore" }: PlayerProps) {
+export default function Player({ id, title, type, season, episode, serverId = "vidsrc" }: PlayerProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
