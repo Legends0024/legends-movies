@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Search from "./Search";
 import { Genre } from "@/types";
@@ -86,7 +86,9 @@ export default function Navbar({ genres = [] }: NavbarProps) {
         </div>
 
         {/* Search */}
-        <Search />
+        <Suspense fallback={<div className="w-48 h-10 bg-neutral-900 rounded-sm animate-pulse"></div>}>
+          <Search />
+        </Suspense>
       </div>
     </header>
   );
