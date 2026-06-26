@@ -110,4 +110,12 @@ app.get("/api/genres/:type", async (req, res) => {
 });
 
 // Vercel Serverless Export
+// Vercel Serverless Export
+if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Backend server running on http://localhost:${PORT}`);
+  });
+  // Force Node to stay alive locally
+  setInterval(() => {}, 1000 * 60 * 60);
+}
 module.exports = app;

@@ -15,6 +15,9 @@ export default function SearchPage() {
       api.search(query).then(data => {
         setResults(data);
         setLoading(false);
+      }).catch(err => {
+        console.error("Search failed:", err);
+        setLoading(false);
       });
     }
   }, [query]);

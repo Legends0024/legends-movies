@@ -8,11 +8,16 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([api.getTrendingMovies(), api.getTrendingTvShows()]).then(([movies, tv]) => {
-      setTrendingMovies(movies);
-      setTrendingTv(tv);
-      setLoading(false);
-    });
+    Promise.all([api.getTrendingMovies(), api.getTrendingTvShows()])
+      .then(([movies, tv]) => {
+        setTrendingMovies(movies);
+        setTrendingTv(tv);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load trending data:", err);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) return <div className="pt-32 text-center">Loading...</div>;
