@@ -1,7 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
+import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+import cors from "cors";
+import axios from "axios";
 
 const app = express();
 app.use(cors());
@@ -134,4 +135,4 @@ if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
   // Force Node to stay alive locally
   setInterval(() => {}, 1000 * 60 * 60);
 }
-module.exports = app;
+export default app;
