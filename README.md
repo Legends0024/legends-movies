@@ -27,18 +27,3 @@ A professional, high-performance streaming web application built with Next.js 15
    npm run dev
    ```
 
-## Production Deployment to Vercel
-
-To deploy this platform to Vercel, you MUST configure your environment variables securely:
-
-1. Push your code to a GitHub repository.
-2. Log in to your [Vercel Dashboard](https://vercel.com/dashboard) and click **Add New** > **Project**.
-3. Import your GitHub repository.
-4. **CRITICAL STEP**: Before clicking deploy, expand the **Environment Variables** section.
-5. Add the following exact key-value pair:
-   - **Key**: `NEXT_PUBLIC_TMDB_API_KEY`
-   - **Value**: `81d9c8ab60c726d593ac67cfc7391d2e` *(Replace with your actual key if different)*
-6. Click **Deploy**. Vercel will securely embed this key during build-time so your API routes function perfectly.
-
----
-*This product uses the TMDb API but is not endorsed or certified by TMDb.*
